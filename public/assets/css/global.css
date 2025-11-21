@@ -1,4 +1,666 @@
-body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-nav { background: #f4f4f4; padding: 10px; }
-nav a { margin-right: 10px; text-decoration: none; color: #333; }
-main { padding: 20px; }
+/* Memory Game - Thème Overlord (Noir, Rouge, Or) */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    font-family: 'Georgia', serif; 
+    background: #0a0a0a; 
+    color: #d4af37; 
+    line-height: 1.6; 
+    padding-top: 120px;
+    padding-bottom: 50px;
+}
+
+body.in-game {
+    padding-top: 80px;
+}
+
+/* Header global (pages normales) */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1a0000 0%, #000000 100%);
+    border-bottom: 3px solid #8b0000;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.5);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-link {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.title-link:hover .site-title {
+    color: #fff;
+    text-shadow: 2px 2px 6px #d4af37;
+}
+
+.site-title {
+    font-size: 1.8rem;
+    margin: 0;
+    color: #d4af37;
+    text-shadow: 2px 2px 4px #8b0000;
+    transition: all 0.3s ease;
+}
+
+.site-subtitle {
+    font-size: 0.9rem;
+    margin: 0;
+    color: #ccc;
+}
+
+.header-nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+    border: 2px solid #d4af37;
+    background: #1a0000;
+    color: #d4af37;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: #8b0000;
+    color: #fff;
+    border-color: #fff;
+}
+
+/* Header pendant le jeu */
+.game-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1a0000 0%, #000000 100%);
+    border-bottom: 3px solid #8b0000;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.5);
+}
+
+.game-header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-stats {
+    display: flex;
+    gap: 2rem;
+}
+.stat-box { display: flex; flex-direction: column; align-items: center; }
+.stat-label { font-size: 0.85rem; font-weight: bold; margin-bottom: 0.25rem; color: #d4af37; }
+.stat-value { font-size: 1.25rem; font-weight: bold; color: #fff; }
+.header-actions { display: flex; gap: 1rem; }
+.btn-quit { 
+    padding: 0.5rem 1.5rem; 
+    border: 2px solid #d4af37; 
+    background: #1a0000; 
+    color: #d4af37; 
+    text-decoration: none; 
+    font-weight: bold; 
+    cursor: pointer; 
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+.btn-quit:hover { 
+    background: #8b0000; 
+    color: #fff;
+    border-color: #fff;
+}
+
+h1 { font-size: 2.5rem; font-weight: bold; margin-bottom: 1rem; color: #d4af37; text-shadow: 2px 2px 4px #8b0000; }
+h2 { font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem; color: #d4af37; }
+h3 { font-size: 1.3rem; font-weight: bold; margin-bottom: 1rem; color: #d4af37; }
+p { margin-bottom: 1rem; color: #ccc; }
+
+.memory-container { max-width: 1600px; margin: 2rem auto; padding: 2rem; }
+.btn { 
+    padding: 0.75rem 2rem; 
+    border: 2px solid #d4af37; 
+    background: #1a0000; 
+    color: #d4af37; 
+    text-decoration: none; 
+    font-weight: bold; 
+    cursor: pointer; 
+    display: inline-block;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    text-align: center;
+}
+.btn:hover { 
+    background: #8b0000; 
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(139, 0, 0, 0.5);
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-success {
+    min-width: 200px;
+}
+
+/* Espacement des actions de formulaire */
+.form-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.menu-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.leaderboard-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* Info note - espacement du texte */
+.info-note {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #8b0000;
+}
+
+.info-note p {
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.empty-state p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.menu-card, .result-card { 
+    background: linear-gradient(135deg, #1a0000 0%, #0a0a0a 100%); 
+    border: 3px solid #8b0000; 
+    padding: 2rem; 
+    margin: 1rem 0;
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.4);
+}
+
+/* Grille de jeu et cartes - Responsive */
+.game-board { 
+    display: grid; 
+    gap: 1rem; 
+    margin: 2rem auto; 
+    justify-content: center;
+    max-width: 100%;
+}
+
+/* Grands écrans (1600px+) - Maximum 3 lignes */
+@media (min-width: 1600px) {
+    .game-board.pairs-3 { grid-template-columns: repeat(4, 100px); }
+    .game-board.pairs-4 { grid-template-columns: repeat(5, 100px); }
+    .game-board.pairs-5 { grid-template-columns: repeat(5, 100px); }
+    .game-board.pairs-6 { grid-template-columns: repeat(6, 100px); }
+    .game-board.pairs-7 { grid-template-columns: repeat(7, 100px); }
+    .game-board.pairs-8 { grid-template-columns: repeat(6, 100px); }
+    .game-board.pairs-9 { grid-template-columns: repeat(6, 100px); }
+    .game-board.pairs-10 { grid-template-columns: repeat(7, 100px); }
+    .game-board.pairs-11 { grid-template-columns: repeat(8, 100px); }
+    .game-board.pairs-12 { grid-template-columns: repeat(8, 100px); }
+}
+
+/* Écrans moyens (1200px-1599px) - Maximum 3 lignes */
+@media (min-width: 1200px) and (max-width: 1599px) {
+    .game-board.pairs-3 { grid-template-columns: repeat(4, 100px); }
+    .game-board.pairs-4 { grid-template-columns: repeat(5, 100px); }
+    .game-board.pairs-5 { grid-template-columns: repeat(5, 100px); }
+    .game-board.pairs-6 { grid-template-columns: repeat(6, 100px); }
+    .game-board.pairs-7 { grid-template-columns: repeat(5, 100px); }
+    .game-board.pairs-8 { grid-template-columns: repeat(6, 100px); }
+    .game-board.pairs-9 { grid-template-columns: repeat(6, 100px); }
+    .game-board.pairs-10 { grid-template-columns: repeat(7, 100px); }
+    .game-board.pairs-11 { grid-template-columns: repeat(8, 100px); }
+    .game-board.pairs-12 { grid-template-columns: repeat(8, 100px); }
+}
+
+/* Écrans standards (769px-1199px) - Laptops et petits écrans */
+@media (min-width: 769px) and (max-width: 1199px) {
+    .game-board.pairs-3 { grid-template-columns: repeat(6, 90px); }
+    .game-board.pairs-4 { grid-template-columns: repeat(4, 90px); }
+    .game-board.pairs-5 { grid-template-columns: repeat(5, 90px); }
+    .game-board.pairs-6 { grid-template-columns: repeat(6, 90px); }
+    .game-board.pairs-7 { grid-template-columns: repeat(7, 90px); }
+    .game-board.pairs-8 { grid-template-columns: repeat(4, 90px); }
+    .game-board.pairs-9 { grid-template-columns: repeat(6, 90px); }
+    .game-board.pairs-10 { grid-template-columns: repeat(5, 90px); }
+    .game-board.pairs-11 { grid-template-columns: repeat(6, 90px); }
+    .game-board.pairs-12 { grid-template-columns: repeat(6, 90px); }
+    
+    .card-wrapper { width: 90px; height: 180px; }
+    .card-back, .card-front { width: 90px; height: 180px; }
+}
+
+/* Carte wrapper - dimensions exactes des images source */
+.card-wrapper { 
+    width: 100px; 
+    height: 200px; 
+}
+
+.card-form { 
+    width: 100%; 
+    height: 100%; 
+}
+
+.card-form .card,
+.card { 
+    width: 100%; 
+    height: 100%; 
+    background: none; 
+    border: none; 
+    padding: 0; 
+    margin: 0;
+    display: block;
+}
+
+/* Dos de carte */
+.card-back { 
+    width: 100px;
+    height: 200px;
+    background: linear-gradient(135deg, #1a0000 0%, #000000 100%); 
+    border: 3px solid #d4af37; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.card-back:hover { 
+    background: linear-gradient(135deg, #2a0000 0%, #1a1a1a 100%);
+    border-color: #fff;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(212, 175, 55, 0.5);
+}
+
+/* Face de carte */
+.card-front,
+.card.matched .card-front,
+.card.flipped .card-front { 
+    width: 100px;
+    height: 200px;
+    background: #000;
+    border: 3px solid #d4af37; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(212, 175, 55, 0.5);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.card.matched .card-front { 
+    border-color: #4a8b4a;
+    opacity: 0.7;
+}
+
+/* Images des cartes */
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.notice { 
+    padding: 1rem; 
+    margin: 1rem 0; 
+    border: 3px solid #8b0000; 
+    text-align: center; 
+    font-weight: bold;
+    background: linear-gradient(135deg, #1a0000 0%, #0a0a0a 100%);
+    color: #d4af37;
+}
+.notice-error { 
+    background: linear-gradient(135deg, #3a0000 0%, #1a0000 100%);
+    border-color: #d4af37;
+}
+.victory-notice { 
+    padding: 1rem; 
+    margin: 1rem 0; 
+    border: 3px solid #d4af37; 
+    text-align: center;
+    background: linear-gradient(135deg, #1a3a1a 0%, #0a2a0a 100%);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5);
+}
+
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; font-weight: bold; margin-bottom: 0.5rem; color: #d4af37; }
+.form-select, .form-input { 
+    width: 100%; 
+    padding: 0.75rem; 
+    border: 2px solid #8b0000; 
+    background: #0a0a0a; 
+    color: #d4af37;
+    font-size: 1rem;
+}
+.form-select:focus, .form-input:focus { 
+    outline: none; 
+    border-color: #d4af37;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+.leaderboard-table { 
+    width: 100%; 
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.leaderboard-table th, .leaderboard-table td { 
+    padding: 1rem; 
+    text-align: center;
+    border-bottom: 1px solid #2a0000;
+}
+
+.leaderboard-table th { 
+    background: #1a0000;
+    color: #d4af37; 
+    font-weight: bold;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.leaderboard-table td {
+    background: transparent;
+    color: #ccc;
+    font-size: 1rem;
+}
+
+.leaderboard-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.leaderboard-table tbody tr:hover {
+    background: rgba(139, 0, 0, 0.2);
+}
+
+/* Top 3 avec couleurs subtiles */
+.leaderboard-table tr.rank-1 {
+    background: rgba(212, 175, 55, 0.08);
+}
+
+.leaderboard-table tr.rank-2 {
+    background: rgba(192, 192, 192, 0.05);
+}
+
+.leaderboard-table tr.rank-3 {
+    background: rgba(205, 127, 50, 0.05);
+}
+
+/* Badges de rang minimalistes */
+.rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.rank-badge.rank-1 {
+    background: #d4af37;
+    color: #000;
+}
+
+.rank-badge.rank-2 {
+    background: #c0c0c0;
+    color: #000;
+}
+
+.rank-badge.rank-3 {
+    background: #cd7f32;
+    color: #000;
+}
+
+.rank-number {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Colonnes spécifiques */
+.pseudo-col {
+    text-align: left !important;
+    font-weight: 600;
+    color: #fff !important;
+}
+
+.score-col strong {
+    color: #d4af37;
+    font-size: 1.2rem;
+}
+
+.leaderboard-table tr.rank-1 .pseudo-col {
+    color: #d4af37 !important;
+}
+
+/* Header du classement */
+.leaderboard-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.5rem;
+    color: #d4af37;
+}
+
+.page-subtitle {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #999;
+}
+
+/* Card du classement */
+.leaderboard-card {
+    background: #0a0a0a;
+    border: 2px solid #2a0000;
+    padding: 0;
+    overflow: hidden;
+}
+
+.result-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+.stat-item { 
+    padding: 1.5rem; 
+    border: 3px solid #8b0000; 
+    text-align: center;
+    background: linear-gradient(135deg, #1a0000 0%, #0a0a0a 100%);
+}
+.stat-item.highlight { 
+    background: linear-gradient(135deg, #2a1a00 0%, #1a0a00 100%);
+    border-color: #d4af37;
+}
+
+ul { list-style: none; padding-left: 0; }
+ul li { padding: 0.5rem 0; border-bottom: 1px solid #8b0000; color: #ccc; }
+
+/* Footer global */
+.site-footer {
+    background: linear-gradient(135deg, #1a0000 0%, #000000 100%);
+    border-top: 3px solid #8b0000;
+    padding: 2rem 0;
+    margin-top: 3rem;
+    box-shadow: 0 -4px 12px rgba(139, 0, 0, 0.5);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-content h3 {
+    color: #d4af37;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.footer-content h4 {
+    color: #d4af37;
+    font-size: 1.2rem;
+    margin: 1.5rem 0 0.75rem;
+}
+
+.footer-rules {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 2rem;
+    text-align: center;
+}
+
+.footer-rules li {
+    padding: 0.75rem;
+    border-bottom: 1px solid #8b0000;
+    color: #ccc;
+    font-size: 1.1rem;
+}
+
+.footer-tips {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 100%);
+    border: 2px solid #8b0000;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    border-radius: 4px;
+}
+
+.footer-tips ul {
+    padding-left: 1.5rem;
+    list-style: disc;
+}
+
+.footer-tips ul li {
+    border: none;
+    padding: 0.5rem 0;
+    list-style-position: inside;
+}
+
+/* Filtre de classement */
+.leaderboard-filter {
+    background: linear-gradient(135deg, #1a0000 0%, #0a0a0a 100%);
+    border: 2px solid #8b0000;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.leaderboard-filter label {
+    display: inline-block;
+    margin-right: 1rem;
+    color: #d4af37;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.leaderboard-filter .form-select {
+    display: inline-block;
+    width: auto;
+    min-width: 200px;
+    cursor: pointer;
+}
+
+/* Tablettes (481px-768px) */
+@media (max-width: 768px) {
+    .memory-container { padding: 1rem; max-width: 100%; }
+    
+    .card-wrapper { width: 70px; height: 140px; }
+    .card-back, .card-front { width: 70px; height: 140px; }
+    
+    .game-board.pairs-3 { grid-template-columns: repeat(6, 70px); }
+    .game-board.pairs-4 { grid-template-columns: repeat(4, 70px); }
+    .game-board.pairs-5 { grid-template-columns: repeat(5, 70px); }
+    .game-board.pairs-6 { grid-template-columns: repeat(6, 70px); }
+    .game-board.pairs-7 { grid-template-columns: repeat(7, 70px); }
+    .game-board.pairs-8 { grid-template-columns: repeat(4, 70px); }
+    .game-board.pairs-9 { grid-template-columns: repeat(6, 70px); }
+    .game-board.pairs-10 { grid-template-columns: repeat(5, 70px); }
+    .game-board.pairs-11 { grid-template-columns: repeat(6, 70px); }
+    .game-board.pairs-12 { grid-template-columns: repeat(6, 70px); }
+    
+    .header-content { flex-direction: column; gap: 1rem; }
+    .header-nav { flex-direction: column; gap: 0.5rem; }
+    .game-header-content { flex-direction: column; gap: 1rem; }
+    .game-stats { flex-wrap: wrap; gap: 1rem; }
+}
+
+/* Mobiles (jusqu'à 480px) */
+@media (max-width: 480px) {
+    .card-wrapper { width: 55px; height: 110px; }
+    .card-back, .card-front { width: 55px; height: 110px; }
+    
+    .game-board { gap: 0.5rem; }
+    
+    .game-board.pairs-3 { grid-template-columns: repeat(3, 55px); }
+    .game-board.pairs-4 { grid-template-columns: repeat(4, 55px); }
+    .game-board.pairs-5 { grid-template-columns: repeat(5, 55px); }
+    .game-board.pairs-6 { grid-template-columns: repeat(6, 55px); }
+    .game-board.pairs-7 { grid-template-columns: repeat(4, 55px); }
+    .game-board.pairs-8 { grid-template-columns: repeat(4, 55px); }
+    .game-board.pairs-9 { grid-template-columns: repeat(6, 55px); }
+    .game-board.pairs-10 { grid-template-columns: repeat(5, 55px); }
+    .game-board.pairs-11 { grid-template-columns: repeat(6, 55px); }
+    .game-board.pairs-12 { grid-template-columns: repeat(6, 55px); }
+}
+
+/* Très grands écrans (2000px+) - Pour utiliser tout l'espace */
+@media (min-width: 2000px) {
+    .memory-container { max-width: 2000px; }
+    
+    .card-wrapper { width: 110px; height: 220px; }
+    .card-back, .card-front { width: 110px; height: 220px; }
+    
+    .game-board.pairs-3 { grid-template-columns: repeat(6, 110px); }
+    .game-board.pairs-4 { grid-template-columns: repeat(8, 110px); }
+    .game-board.pairs-5 { grid-template-columns: repeat(10, 110px); }
+    .game-board.pairs-6 { grid-template-columns: repeat(6, 110px); }
+    .game-board.pairs-7 { grid-template-columns: repeat(7, 110px); }
+    .game-board.pairs-8 { grid-template-columns: repeat(8, 110px); }
+    .game-board.pairs-9 { grid-template-columns: repeat(9, 110px); }
+    .game-board.pairs-10 { grid-template-columns: repeat(10, 110px); }
+    .game-board.pairs-11 { grid-template-columns: repeat(11, 110px); }
+    .game-board.pairs-12 { grid-template-columns: repeat(12, 110px); }
+}

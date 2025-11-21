@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php'; 
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->safeLoad();
@@ -10,15 +10,37 @@ use Core\Router;
 // Initialisation du routeur
 $router = new Router();
 
-// Définition des routes de l'application
-// La route "/" pointe vers la méthode "index" du contrôleur HomeController
-$router->get('/', 'App\\Controllers\\HomeController@index');
+// ========================================
+// ROUTES DU JEU MEMORY
+// ========================================
 
-$router->get('/about', 'App\\Controllers\\HomeController@about');
+// Page d'accueil du jeu (menu principal)
+$router->get('/', 'App\\Controllers\\GameController@index');
+$router->get('/game', 'App\\Controllers\\GameController@index');
 
-// La route "/articles" pointe vers la méthode "index" du contrôleur ArticleController
-$router->get('/articles', 'App\\Controllers\\ArticleController@index');
+// Démarrer une nouvelle partie
+$router->post('/game/start', 'App\\Controllers\\GameController@start');
 
-// Exécution du routeur :
-// On analyse l'URI et la méthode HTTP pour appeler le contrôleur et la méthode correspondants
+// Jouer (afficher la partie en cours)
+$router->get('/game/play', 'App\\Controllers\\GameController@play');
+
+// Retourner une carte
+$router->post('/game/flip', 'App\\Controllers\\GameController@flip');
+
+// Retourner automatiquement les cartes incorrectes
+$router->get('/game/flipback', 'App\\Controllers\\GameController@flipback');
+
+// Afficher le formulaire de fin de partie
+$router->get('/game/finish', 'App\\Controllers\\GameController@finish');
+
+// Sauvegarder le score
+$router->post('/game/save-score', 'App\\Controllers\\GameController@saveScore');
+
+// Quitter la partie
+$router->get('/game/quit', 'App\\Controllers\\GameController@quit');
+
+// Afficher le classement
+$router->get('/game/leaderboard', 'App\\Controllers\\GameController@leaderboard');
+
+// Exécution du routeur
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
