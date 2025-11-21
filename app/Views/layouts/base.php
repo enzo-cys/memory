@@ -94,6 +94,9 @@
           <li>Entraînez-vous régulièrement pour développer votre mémoire visuelle</li>
         </ul>
       </div>
+      <div class="footer-actions" style="text-align:center; margin-top:1.5rem;">
+        <a href="https://github.com/enzo-cys/memory" class="btn btn-github" target="_blank" rel="noopener">Voir sur GitHub</a>
+      </div>
     </div>
   </footer>
   </body>
