@@ -231,7 +231,8 @@ class GameController extends BaseController
 
         $game = $_SESSION['game'];
         $pseudo = trim($_POST['pseudo']);
-        $time = time() - $game['start_time'];
+        // Utiliser le temps enregistré à la fin de la partie (end_time) pour éviter de compter le temps de saisie du pseudo
+        $time = isset($game['end_time']) ? ($game['end_time'] - $game['start_time']) : (time() - $game['start_time']);
 
         if (!empty($pseudo)) {
             $this->gameModel->saveScore(
