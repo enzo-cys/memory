@@ -1,11 +1,13 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../core/helpers.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->safeLoad();
 
 use Core\Router;
+use Core\Config;
 
 // Initialisation du routeur
 $router = new Router();
@@ -16,6 +18,7 @@ $router = new Router();
 
 // Page d'accueil du jeu (menu principal)
 $router->get('/', 'App\\Controllers\\GameController@index');
+$router->get('/index.php', 'App\\Controllers\\GameController@index'); // Pour accès direct
 $router->get('/game', 'App\\Controllers\\GameController@index');
 
 // Démarrer une nouvelle partie
