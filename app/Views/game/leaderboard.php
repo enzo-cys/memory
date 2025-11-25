@@ -15,7 +15,7 @@
     <!-- Filtre par nombre de paires -->
     <div class="leaderboard-filter">
         <label for="pairs-filter">Filtrer par nombre de paires :</label>
-        <select id="pairs-filter" class="form-select" onchange="if(this.value === '') { window.location.href='/game/leaderboard'; } else { window.location.href='/game/leaderboard?pairs=' + this.value; }">
+        <select id="pairs-filter" class="form-select" onchange="if(this.value === '') { window.location.href='<?= url('/game/leaderboard') ?>'; } else { window.location.href='<?= url('/game/leaderboard') ?>?pairs=' + this.value; }">
             <option value="" <?= !isset($filter_pairs) ? 'selected' : '' ?>>Tous les classements</option>
             <option value="3" <?= isset($filter_pairs) && $filter_pairs === 3 ? 'selected' : '' ?>>3 paires</option>
             <option value="4" <?= isset($filter_pairs) && $filter_pairs === 4 ? 'selected' : '' ?>>4 paires</option>
@@ -35,7 +35,7 @@
             <div class="empty-state">
                 <p>Aucun score enregistré pour le moment</p>
                 <p>Soyez le premier à jouer !</p>
-                <a href="/game<?= isset($filter_pairs) ? '?pairs=' . $filter_pairs : '' ?>" class="btn btn-primary">Jouer maintenant</a>
+                <a href="<?= url('/game' . (isset($filter_pairs) ? '?pairs=' . $filter_pairs : '')) ?>" class="btn btn-primary">Jouer maintenant</a>
             </div>
         <?php else: ?>
             <table class="leaderboard-table">
@@ -90,6 +90,6 @@
     </div>
 
     <div class="leaderboard-actions">
-        <a href="/game<?= isset($filter_pairs) ? '?pairs=' . $filter_pairs : '' ?>" class="btn btn-primary">Jouer une partie</a>
+        <a href="<?= url('/game' . (isset($filter_pairs) ? '?pairs=' . $filter_pairs : '')) ?>" class="btn btn-primary">Jouer une partie</a>
     </div>
 </div>
