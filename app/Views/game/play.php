@@ -19,7 +19,7 @@ if ($needsFlipBack) {
         <div class="victory-notice">
             <h2>Félicitations !</h2>
             <p>Vous avez trouvé toutes les paires !</p>
-            <a href="/game/finish" class="btn btn-success">Voir les résultats</a>
+            <a href="<?= url('/game/finish') ?>" class="btn btn-success">Voir les résultats</a>
         </div>
     <?php endif; ?>
 
@@ -33,21 +33,21 @@ if ($needsFlipBack) {
                 <?php if ($card['isMatched']): ?>
                     <div class="card matched">
                         <div class="card-front">
-                            <img src="/assets/images/<?= $imageName ?>" alt="Card" class="card-image">
+                            <img src="<?= asset('images/' . $imageName) ?>" alt="Card" class="card-image">
                         </div>
                     </div>
                 <?php elseif ($card['isFlipped']): ?>
                     <div class="card flipped">
                         <div class="card-front">
-                            <img src="/assets/images/<?= $imageName ?>" alt="Card" class="card-image">
+                            <img src="<?= asset('images/' . $imageName) ?>" alt="Card" class="card-image">
                         </div>
                     </div>
                 <?php else: ?>
-                    <form method="POST" action="/game/flip" class="card-form">
+                    <form method="POST" action="<?= url('/game/flip') ?>" class="card-form">
                         <input type="hidden" name="card_id" value="<?= $card['id'] ?>">
                         <button type="submit" class="card">
                             <div class="card-back">
-                                <img src="/assets/images/dos.png" alt="Card back" class="card-image">
+                                <img src="<?= asset('images/dos.png') ?>" alt="Card back" class="card-image">
                             </div>
                         </button>
                     </form>
@@ -101,7 +101,7 @@ if ($needsFlipBack) {
             (function() {
                 setTimeout(function() {
                     // Recharger la page pour retourner les cartes
-                    window.location.href = '/game/flipback';
+                    window.location.href = '<?= url('/game/flipback') ?>';
                 }, 1000);
             })();
     <?php endif; ?>

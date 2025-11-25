@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Vue : Fin de partie - Formulaire de sauvegarde du score
  * --------------------------------------------------------
@@ -8,7 +9,7 @@
 <div class="memory-container">
     <div class="result-card">
         <h1 class="result-title">Partie Terminée !</h1>
-        
+
         <div class="result-stats">
             <div class="stat-item">
                 <span class="stat-label">Temps</span>
@@ -32,27 +33,26 @@
             <h2>Enregistrer votre score</h2>
             <p class="subtitle">Entrez votre pseudo !</p>
 
-            <form method="POST" action="/game/save-score" class="score-form">
+            <form method="POST" action="<?= url('/game/save-score') ?>" class="score-form">
                 <div class="form-group">
                     <label for="pseudo">Pseudo :</label>
-                    <input 
-                        type="text" 
-                        name="pseudo" 
-                        id="pseudo" 
+                    <input
+                        type="text"
+                        name="pseudo"
+                        id="pseudo"
                         class="form-input"
                         placeholder="Votre pseudo"
                         required
                         maxlength="20"
                         pattern="[A-Za-z0-9_-]+"
-                        title="Lettres, chiffres, tirets et underscores uniquement"
-                    >
+                        title="Lettres, chiffres, tirets et underscores uniquement">
                 </div>
 
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">
                         Enregistrer mon score
                     </button>
-                    <a href="/game" class="btn btn-secondary">
+                    <a href="<?= url('/game') ?>" class="btn btn-secondary">
                         Nouvelle partie
                     </a>
                 </div>

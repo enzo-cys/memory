@@ -18,7 +18,7 @@
 
   <!-- Bonne pratique : rendre le site responsive -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/global.css">
+  <link rel="stylesheet" href="<?= asset('css/global.css') ?>">
 </head>
 <body<?php
       $bodyClass = '';
@@ -32,14 +32,14 @@
     <header class="site-header">
       <div class="header-content">
         <div class="header-title">
-          <a href="/game" class="title-link">
+          <a href="<?= url('/game') ?>" class="title-link">
             <h1 class="site-title">Memory Game</h1>
             <p class="site-subtitle">ذاكرة - Jeu des paires</p>
           </a>
         </div>
         <div class="header-nav">
-          <a href="/game" class="nav-link">Jouer une partie</a>
-          <a href="/game/leaderboard" class="nav-link">Voir le Classement</a>
+          <a href="<?= url('/game') ?>" class="nav-link">Jouer une partie</a>
+          <a href="<?= url('/game/leaderboard') ?>" class="nav-link">Voir le Classement</a>
         </div>
       </div>
     </header>
@@ -63,7 +63,7 @@
             <span class="stat-value"><?= ($matches ?? 0) ?> / <?= $pairs ?? 0 ?></span>
           </div>
         </div>
-        <a href="/game/quit" class="btn-quit" onclick="return confirm('Abandonner la partie ?')">Quitter</a>
+        <a href="<?= url('/game/quit') ?>" class="btn-quit" onclick="return confirm('Abandonner la partie ?')">Quitter</a>
       </div>
     </header>
   <?php endif; ?>

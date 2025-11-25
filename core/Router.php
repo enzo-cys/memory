@@ -53,6 +53,12 @@ class Router
         // On extrait uniquement le chemin (sans paramètres GET ou #ancre)
         $path = parse_url($uri, PHP_URL_PATH) ?? '/';
 
+        // Retirer le préfixe de base URL (ex: /memory/public)
+        $baseUrl = Config::getBaseUrl();
+        if ($baseUrl && strpos($path, $baseUrl) === 0) {
+            $path = substr($path, strlen($baseUrl)) ?: '/';
+        }
+
         // Vérifie si une route correspond à ce chemin pour la méthode demandée
         foreach ($this->routes[$method] ?? [] as $route => $action) {
             if ($route === $path) {

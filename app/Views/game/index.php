@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Vue : Menu principal du jeu Memory
  * -----------------------------------
@@ -10,7 +11,7 @@
         <h2>Nouvelle Partie</h2>
         <p class="description">Choisissez le nombre de paires et testez votre mémoire !</p>
 
-        <form method="POST" action="/game/start" class="game-form">
+        <form method="POST" action="<?= url('/game/start') ?>" class="game-form">
             <div class="form-group">
                 <label for="pairs">Nombre de paires :</label>
                 <select name="pairs" id="pairs" class="form-select">
@@ -35,7 +36,7 @@
     </div>
 
     <div class="menu-actions">
-        <a href="/game/leaderboard" class="btn btn-success">
+        <a href="<?= url('/game/leaderboard') ?>" class="btn btn-success">
             Voir le Classement
         </a>
     </div>

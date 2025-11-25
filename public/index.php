@@ -44,6 +44,5 @@ $router->get('/game/quit', 'App\\Controllers\\GameController@quit');
 
 // Afficher le classement
 $router->get('/game/leaderboard', 'App\\Controllers\\GameController@leaderboard');
-
 // Exécution du routeur
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

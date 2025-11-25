@@ -63,7 +63,7 @@ class GameController extends BaseController
         ];
 
         // Rediriger vers la partie
-        header('Location: /game/play');
+        header('Location: ' . url('/game/play'));
         exit;
     }
 
@@ -74,7 +74,7 @@ class GameController extends BaseController
     {
         // Vérifier qu'une partie est en cours
         if (!isset($_SESSION['game'])) {
-            header('Location: /game');
+            header('Location: ' . url('/game'));
             exit;
         }
 
@@ -97,7 +97,7 @@ class GameController extends BaseController
     public function flip(): void
     {
         if (!isset($_SESSION['game']) || !isset($_POST['card_id'])) {
-            header('Location: /game');
+            header('Location: ' . url('/game'));
             exit;
         }
 
@@ -125,7 +125,7 @@ class GameController extends BaseController
         }
 
         if (!$card) {
-            header('Location: /game/play');
+            header('Location: ' . url('/game/play'));
             exit;
         }
 
@@ -166,7 +166,7 @@ class GameController extends BaseController
             }
         }
 
-        header('Location: /game/play');
+        header('Location: ' . url('/game/play'));
         exit;
     }
 
@@ -176,7 +176,7 @@ class GameController extends BaseController
     public function flipback(): void
     {
         if (!isset($_SESSION['game'])) {
-            header('Location: /game');
+            header('Location: ' . url('/game'));
             exit;
         }
 
@@ -191,7 +191,7 @@ class GameController extends BaseController
 
         $game['flipped'] = [];
 
-        header('Location: /game/play');
+        header('Location: ' . url('/game/play'));
         exit;
     }
 
@@ -201,7 +201,7 @@ class GameController extends BaseController
     public function finish(): void
     {
         if (!isset($_SESSION['game'])) {
-            header('Location: /game');
+            header('Location: ' . url('/game'));
             exit;
         }
 
@@ -225,7 +225,7 @@ class GameController extends BaseController
     public function saveScore(): void
     {
         if (!isset($_SESSION['game']) || !isset($_POST['pseudo'])) {
-            header('Location: /game');
+            header('Location: ' . url('/game'));
             exit;
         }
 
@@ -246,7 +246,7 @@ class GameController extends BaseController
         // Nettoyer la session
         unset($_SESSION['game']);
 
-        header('Location: /game');
+        header('Location: ' . url('/game'));
         exit;
     }
 
@@ -256,7 +256,7 @@ class GameController extends BaseController
     public function quit(): void
     {
         unset($_SESSION['game']);
-        header('Location: /game');
+        header('Location: ' . url('/game'));
         exit;
     }
 
